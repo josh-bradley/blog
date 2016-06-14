@@ -1,0 +1,24 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "My blog",
+  "main": "public\\index.html",
+  "dependencies": {
+    "gulp-vulcanize": "^6.1.0",
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/josh-bradley/blog.git"
+  },
+  "author": "Josh Bradley",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/josh-bradley/blog/issues"
+  },
+  "homepage": "https://github.com/josh-bradley/blog#readme"
+}

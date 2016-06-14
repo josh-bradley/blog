@@ -1,0 +1,28 @@
+{
+  "name": "blog",
+  "homepage": "https://github.com/josh-bradley/blog",
+  "authors": [
+    "Josh <josh-bradley@outlook.com>"
+  ],
+  "description": "My blog",
+  "main": "public\\index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "app-layout": "PolymerElements/app-layout#^0.9.1",
+    "iron-icons": "PolymerElements/iron-icons#^1.1.3",
+    "paper-card": "PolymerElements/paper-card#^1.1.1",
+    "paper-dialog": "PolymerElements/paper-dialog#^1.0.4",
+    "paper-icon-button": "PolymerElements/paper-icon-button#^1.1.1",
+    "paper-toggle-button": "PolymerElements/paper-toggle-button#^1.1.2",
+    "polymer": "^1.5.0"
+  }
+}
