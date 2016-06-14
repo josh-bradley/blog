@@ -1,4 +1,8 @@
 {
   ".read": true,
-  ".write": true
+  ".write": false,
+  "subscribers": {
+      ".read": false,
+      ".write": true
+  }
 }

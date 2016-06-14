@@ -1,0 +1,26 @@
+{
+  "name": "Not an orge",
+  "short_name": "Not an orge",
+  "icons": [{
+    "src": "icons/icon_124.png",
+    "sizes": "124x124",
+    "type": "image/png"
+  }, {
+    "src": "icons/icon_144.png",
+    "sizes": "144x144",
+    "type": "image/png"
+  }, {
+    "src": "touch/icon_256.png",
+    "sizes": "256x256",
+    "type": "image/png"
+  }, {
+    "src": "touch/icon_512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
+  "start_url": "/index.html",
+  "display": "fullscreen",
+  "background_color": "#000000",
+  "theme_color": "#2F3BA2",
+  "gcm_sender_id": "345162061589"
+}

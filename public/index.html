@@ -3,67 +3,103 @@
   <head>
     <meta charset="utf-8">
     <title>Welcome to Firebase Hosting</title>
-    <style media="screen">
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="import" href="bower_components/paper-card/paper-card.html">
+    <link rel="import" href="bower_components/paper-styles/color.html">
+    <link rel="import" href="bower_components/app-layout/app-header-layout/app-header-layout.html">
+    <link rel="import" href="bower_components/app-layout/app-header/app-header.html">
+    <link rel="import" href="bower_components/app-layout/app-toolbar/app-toolbar.html">
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+    <link rel="import" href="bower_components/iron-icons/iron-icons.html">
+    <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+    <link rel="import" href="bower_components/paper-toggle-button/paper-toggle-button.html">
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link rel="manifest" href="manifest.json">
+    <style>
       body {
-        font-family: Roboto, Arial, sans-serif;
-        background: #ECEFF1;
-        color: rgba(0,0,0,0.87);
+        background-color:#eceff1;
+        font-family:Arimo, sans-serif;
+        margin:0px;
+        --paper-icon-button-ink-color: white;
       }
 
-      a {
-        color: rgb(3,155,229);
+      h2{
+        opacity: 0.9;
+      }
+      paper-card{
+        padding:20px;
+        width:100%;
+        display:block;
+        margin-top:50px;
+        opacity:0.7;
+      }
+      h1 {
+        margin:0 auto;
+        text-align:center;
+        width:100%;
+
+      }
+      app-header{
+        background-color:#37474f;
+        color:white;
       }
 
-      #message {
-        max-width: 400px;
-        margin: 40px auto;
-        box-shadow: 0 1px 3px 0 rgba(0,0,0,0.2),0 1px 1px 0 rgba(0,0,0,0.14),0 2px 1px -1px rgba(0,0,0,0.12);
-        border-radius: 2px;
-        background: white;
-        padding: 16px 24px;
+      .post-content{
+        width:80%;
+        margin:0 auto;
+        max-width:1024px;
       }
 
-      #message h1 {
-        font-size: 22px;
-        font-weight: 500;
-        text-align: center;
-        margin: 0 0 16px;
-      }
+      @media (max-width:600px){
+        .post-content{
+          width:100%;
+        }
 
-      #message p {
-        font-weight: 300;
-        line-height: 150%;
-      }
-
-      #message ul {
-        list-style: none;
-        margin: 16px 0 0;
-        padding: 0;
-        text-align: center;
-      }
-
-      #message li a {
-        display: inline-block;
-        padding: 8px;
-        text-transform: uppercase;
-        text-decoration: none;
-        font-weight: 500;
-        background: rgb(3,155,229);
-        color: white;
-        border: 1px solid rgb(3,155,229);
-        border-radius: 3px;
-        font-size: 14px;
-        box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+        paper-card{
+          margin:0;
+          margin-bottom:10px;
+        }
       }
     </style>
   </head>
   <body>
-    <div id="message">
-      <h1>Welcome to Firebase Hosting</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <ul>
-        <li><a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a></li>
-      </ul>
-    </div>
+    <template is="dom-bind" id="app">
+      <paper-dialog id="settingsDialog" with-backdrop always-on-top>
+        <h2>Settings</h2>
+        <paper-toggle-button checked="[[pushSubscription]]" on-change="pushSettingChanged">Receive push notifications</paper-toggle-button>
+      </paper-dialog>
+      <app-header-layout>
+        <app-header>
+          <app-toolbar>
+            <div title>
+              <h1>{{name}}</h1>
+            </div>
+            <paper-icon-button icon="settings" on-click="settingsToggle"></paper-icon-button>
+
+          </app-toolbar>
+        </app-header>
+
+        <div class="post-content">
+          <template as="post" items="{{posts}}" is="dom-repeat">
+            <paper-card>
+              <h2>{{post.title}}</h2>
+              <div>{{post.body}}</div>
+            </paper-card>
+          </template>
+        </div>
+      </app-header-layout>
+    </template>
+    <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAqjCVoqN1uZczzkW6fJRWnYQUg4rNcjq4",
+        authDomain: "my-progressive-blog.firebaseapp.com",
+        databaseURL: "https://my-progressive-blog.firebaseio.com",
+        storageBucket: "my-progressive-blog.appspot.com",
+      };
+      firebase.initializeApp(config);
+    </script>
+    <script src="scripts/app.js"></script>
   </body>
 </html>
