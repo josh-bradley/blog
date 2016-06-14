@@ -25,6 +25,11 @@
 
       h2{
         opacity: 0.9;
+        display:inline;
+      }
+      .post-date{
+        font-size:0.8em;
+        margin-bottom:10px;
       }
       paper-card{
         padding:20px;
@@ -50,9 +55,10 @@
         max-width:1024px;
       }
 
-      @media (max-width:600px){
+      @media all and (max-width: 1000px){
         .post-content{
           width:100%;
+          margin:0;
         }
 
         paper-card{
@@ -81,9 +87,10 @@
 
         <div class="post-content">
           <template as="post" items="{{posts}}" is="dom-repeat">
-            <paper-card>
+            <paper-card id="{{post.id}}">
               <h2>{{post.title}}</h2>
-              <div>{{post.body}}</div>
+              <div class="post-date">{{post.date}}</div>
+              <div class="post-body"></div>
             </paper-card>
           </template>
         </div>

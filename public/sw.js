@@ -1,4 +1,4 @@
-var cacheName = 'blog-1-0-0';
+var cacheName = 'blog-1-0-1';
 
 var filesToCache = [
     // We add this as well as index.html as the user may hit '/' or '/index.html'
