@@ -1,8 +1,12 @@
 {
-  ".read": true,
+  ".read": false,
   ".write": false,
   "subscribers": {
       ".read": false,
-      ".write": true
+      ".write": "!data.exists() || !newData.exists()"
+  },
+  "posts": {
+    ".read":true,
+    ".write": false
   }
 }

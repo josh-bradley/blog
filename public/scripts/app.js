@@ -4,6 +4,7 @@
   var app = document.querySelector("#app");
 
   app.name = "My Blog";
+  app.serviceWorkerEnabled = false;
 
   app.observers = ['newPosts(posts)']
 
@@ -12,32 +13,23 @@
   };
 
   app.pushSettingChanged = function(){
-    console.log("here mabyer");
-
     window.navigator.serviceWorker.ready.then(function(reg){
-      console.log("got herer");
+      var database = firebase.database();
 
       if(app.pushSubscription){
-        console.log("unsubscribing from push messaaging")
+        var subId = app._getPushMessageSubId();
+
         app.pushSubscription.unsubscribe();
-
-        var database = firebase.database();
-        var subId = app.pushSubscription.endpoint.slice(app.pushSubscription.endpoint.indexOf('send') + 5);
-
-        database.ref('subscribers/' + subId).set(
-          false
-        );
-
+        app.pushSubscription = null;
+        database.ref('subscribers/' + subId).remove();
       } else {
         reg.pushManager.subscribe({
           userVisibleOnly: true
         }).then(function (subscription) {
           app.pushSubscription = subscription;
-          var subId = subscription.endpoint.slice(subscription.endpoint.indexOf('send') + 5);
-          console.log(subId);
-          console.log(subscription.endpoint);
 
-          var database = firebase.database();
+          var subId = app._getPushMessageSubId();
+          console.log(subId);
 
           database.ref('subscribers/' + subId).set(
             true
@@ -48,6 +40,9 @@
     });
   };
 
+  app._getPushMessageSubId = function(){
+    return app.pushSubscription.endpoint.slice(app.pushSubscription.endpoint.indexOf('send') + 5);
+  };
 
   app.newPosts = function(posts){
     console.log("got new posts: " + posts.length);
@@ -61,6 +56,10 @@
 
     });
   };
+
+  app.refreshPage = function(){
+    window.location.reload();
+  };
       
   // Get a reference to the database service
   var database = firebase.database();
@@ -70,7 +69,7 @@
     app.posts = Object.keys(posts).map(function(propName){
       var post = posts[propName]
       post.id = "_" + propName;
-      post.date = new Date(post.postedOn);
+      post.dateString = moment(post.postedOn).format("MMM Do YY");
       return post;
     });
   });
@@ -80,10 +79,23 @@
     navigator.serviceWorker
       .register('/sw.js')
       .then(function(reg) {
+        reg.onupdatefound = function() {
+          var installingWorker = reg.installing;
+          installingWorker.onstatechange = function () {
+            if(installingWorker.state == 'installed') {
+                if (navigator.serviceWorker.controller) {
+                  app.$.swUpdateToast.show();
+                }
+            }
+          }
+        };
+
         console.log('Service Worker Registered');
         reg.pushManager.getSubscription().then(function(pushSub){
           app.pushSubscription =  pushSub;
         });
+
+        app.serviceWorkerEnabled = true;
       });
   }
 })(document);

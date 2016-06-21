@@ -1,10 +1,14 @@
-var cacheName = 'blog-1-0-1';
+var cacheName = 'blog-1-0-16';
 
 var filesToCache = [
     // We add this as well as index.html as the user may hit '/' or '/index.html'
     '/',
     '/index.html',
-    '/scripts/app.js'
+    '/scripts/app.js',
+
+    // External resources
+    'https://fonts.googleapis.com/css?family=Arimo',
+    '/lib/moment.min.js'
 ];
 
 self.addEventListener('install', function(e) {
